@@ -76,38 +76,52 @@
 
 <div class="book-container">
     <h1>Book</h1>
-    <form id="bookForm2" name="bookForm2" class="form-horizontal">
-        <input type="hidden" name="book_id" id="book_id">
-        <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">Book Name</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Enter Book Name" value="" maxlength="50" required=""><br>
-            </div>
-            <label for="name" class="col-sm-2 control-label">Book Category</label>
-            <div class="col-sm-12">
-               <select name="categorySelector" id="categorySelector" class="form-control" style="width:300px;" >
-                   @foreach ($books as $book )
-                   <option value="{{ $book->title}}">{{ $book->title}}</option>
-                   @endforeach
-                   
-               </select><br>
-            </div>
-            <label for="name" class="col-sm-2 control-label">Price</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price" value="" maxlength="50" required=""><br>
-            </div>
-            <label for="name" class="col-sm-2 control-label">Author</label>
-            <div class="col-sm-12">
-                <input type="text" class="form-control" id="author" name="author" placeholder="Enter Author" value="" maxlength="50" required=""><br>
+    <a class="btn btn-success" href="javascript:void(0)" id="createNewBookHandler"> Create New Book</a><br><br>
+    <div class="modal fade" id="ajaxModel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelHeading2"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="bookForm2" name="bookForm2" class="form-horizontal">
+                       <input type="hidden" name="book_id" id="book_id">
+                        <div class="form-group">
+                            
+                            <label for="name" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Enter Category" value="" maxlength="50" required=""><br>
+                            </div>
+    
+                            <label for="name" class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-12">
+                                <select name="categorySelector" id="categorySelector" class="form-control" style="width:300px;" >
+                                    @foreach ($books as $book )
+                                    <option value="{{ $book->title}}">{{ $book->title}}</option>
+                                    @endforeach
+                                </select><br>
+                            </div>
+    
+                            <label for="name" class="col-sm-2 control-label">Price</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="Price" name="Price" placeholder="Enter Category" value="" maxlength="50" required=""><br>
+                            </div>
+    
+                            <label for="name" class="col-sm-2 control-label">Author</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="Author" name="Author" placeholder="Enter Category" value="" maxlength="50" required=""><br>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                         <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes</button><br>
+                         <span id ="notification"></span>
+                        <br><br>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary" id="saveBtn2" value="create">Save</button><br>
-        <span id ="notification"></span>
-        <br><br>
-        </div>
-    </form>
-</div>
+    </div>
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -138,7 +152,7 @@
     });
 
 
-    // When Create Button is Clicked
+    // When Create Categeory Button is Clicked
 
 
     $('#createNewBook').click(function () {
@@ -148,6 +162,18 @@
         $('#modelHeading').html("Create New Category");
         $('#ajaxModel').modal('show');
     });
+
+    
+    // When Create New Book Button Clicked
+
+    $('#createNewBookHandler').click(function () {
+        $('#saveBtn').val("create-book");
+        $('#book_id').val('');
+        $('#bookForm').trigger("reset");
+        $('#modelHeading2').html("Create New Book");
+        $('#ajaxModel2').modal('show');
+    });
+
 
 
     // Edit Book Button
